@@ -39,6 +39,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@nestjs/core");
 var path_1 = require("path");
 var app_module_1 = require("./app.module");
+var express_handlebars_1 = require("express-handlebars");
 function bootstrap() {
     var _a;
     return __awaiter(this, void 0, void 0, function () {
@@ -48,9 +49,14 @@ function bootstrap() {
                 case 0: return [4 /*yield*/, core_1.NestFactory.create(app_module_1.AppModule)];
                 case 1:
                     app = _b.sent();
-                    app.useStaticAssets((0, path_1.join)(__dirname, '..', 'public'));
-                    app.setBaseViewsDir((0, path_1.join)(__dirname, '..', 'views'));
+                    app.engine('hbs', (0, express_handlebars_1.engine)({
+                        extname: '.hbs',
+                        defaultLayout: 'main',
+                        layoutsDir: (0, path_1.join)(__dirname, '..', 'views/layouts'),
+                        partialsDir: (0, path_1.join)(__dirname, '..', 'views/partials'),
+                    }));
                     app.setViewEngine('hbs');
+                    app.useStaticAssets((0, path_1.join)(__dirname, '..', 'public'));
                     return [4 /*yield*/, app.listen((_a = process.env.PORT) !== null && _a !== void 0 ? _a : 3000)];
                 case 2:
                     _b.sent();

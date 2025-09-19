@@ -15,10 +15,17 @@ var AppController = /** @class */ (function () {
     AppController.prototype.getHello = function () {
         return this.appService.getHello();
     };
+    AppController.prototype.getAboutPage = function () {
+        return {};
+    };
     __decorate([
         (0, common_1.Get)(),
-        (0, common_1.Render)("index")
+        (0, common_1.Render)("pages/index")
     ], AppController.prototype, "getHello", null);
+    __decorate([
+        (0, common_1.Get)("/about"),
+        (0, common_1.Render)("pages/about")
+    ], AppController.prototype, "getAboutPage", null);
     AppController = __decorate([
         (0, common_1.Controller)()
     ], AppController);
